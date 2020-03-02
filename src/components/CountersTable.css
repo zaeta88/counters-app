@@ -1,0 +1,117 @@
+.actions .member-link {
+  padding: 0 5px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  padding: 4px  8px;
+  margin: 0 4px;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.actions .member-link.disabled, .actions .member-link:disabled {
+  opacity: 0.6;
+  cursor: no-drop;
+}
+.actions .member-link:hover {
+  background-color: #e1fce5;
+}
+
+.actions .member-link:disabled {
+  background-color: gray;
+}
+
+.actions .member-link img {
+  height: 22px;
+}
+
+.btn-secondary.dropdown-toggle {
+  color: #28a745;
+  background-color: transparent;
+  background-image: none;
+  border-color: #28a745;
+  margin-right: 10px;
+}
+
+.btn-secondary:hover.dropdown-toggle, .btn-secondary:active.dropdown-toggle {
+  color: #fff;
+  background-color: #28a745;
+}
+
+.carret img {
+  width: 14px;
+  transform: rotate(90deg);
+}
+
+.pagination, .right-button, .actions, .carret {
+  float: right;
+}
+
+.page-item.active .page-link {
+  background-color: #5bc66a;
+  border-color: #5bc66a;
+}
+
+.page-link {
+  color: #5bc66a;
+}
+
+.react-bootstrap-table-editing-cell {
+  max-width: 30px;
+}
+
+.search-label, .item {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.search-label input {
+  background: url('../assets/img/search.svg') no-repeat 95% center;
+  background-size: 20px 20px;
+  padding-right: 30px;
+  max-width: 220px;
+  float: right;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+
+.table-bordered tbody tr:first-child td {
+    padding-top: .7rem;
+}
+
+.table-bordered {
+  border: none;
+}
+
+.table-bordered td, .table-bordered th {
+  border: none;
+  padding: .3rem .75rem;
+}
+
+.table-bordered thead th {
+  border-bottom: 2px solid #5bc66a;
+}
+
+.table-bordered thead tr th:last-child, .table-bordered thead tr th:nth-child(4) {
+  width: 50px;
+}
+
+thead tr {
+  border: 1px solid #edf3eb;
+  background-color: #edf3eb;
+  box-shadow: 0px 6px 8px -7px #798189;
+}
+
+.content-wrapper {
+  padding: 10px 24px;
+}
+
+.content-wrapper hr {
+  display: none;
+}
+
+.item img {
+  height: 18px;
+}
