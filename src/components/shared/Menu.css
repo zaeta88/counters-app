@@ -1,0 +1,36 @@
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-item a.nav-link {
+  display: inline-block;
+  padding: 0 5px;
+  position: relative;
+}
+
+.navbar-light {
+  background-color: #fff;
+  border-bottom: 1px solid lightgray;
+}
+
+.nav-item.active a:before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 0;
+  height: 1px;
+  background-color: #000;
+}
+
+.wrapper-div {
+  background-color: rgba(230, 230, 230, 0.8);
+  backdrop-filter: blur(5px);
+  margin-top: 15px;
+}
+
+.footer img {
+  height: 20px;
+  margin-left: 5px;
+}

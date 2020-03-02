@@ -1,0 +1,22 @@
+body {
+  font-family: "Inconsolata", monosapce;
+  background: url('assets/img/background.jpeg') no-repeat center;
+  background-size: cover;
+}
+
+.site-section {
+  padding: 2rem 0;
+}
+
+a, .green-text {
+  color: #5bc66a;
+}
+
+a:hover {
+  color: gray;
+}
+
+.btn-secondary, .btn-secondary:hover {
+  background-color: #bdbdbd;
+  border-color: #bdbdbd;
+}
