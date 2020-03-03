@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Menu.css';
 import Dashboard from '../Dashboard';
 import Counters from '../Counters';
+import CounterForm from '../CounterForm';
 import NotFound from './NotFound';
 import cornershop from '../../assets/img/cornershop.png';
 import {
@@ -17,13 +18,34 @@ class Menu extends Component {
     this.state = {
       activeNav: false
     };
-    this.handleActiveNav = this.handleActiveNav.bind(this)
+    this.handleActiveNav = this.handleActiveNav.bind(this);
+    this.handleCountersChange = this.handleCountersChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadCounters();
   }
 
   handleActiveNav = (value) => {
     this.setState({
       activeNav: value
-    })    
+    })
+  }
+
+  handleCountersChange = (counter) => {
+    let counters = this.state.counters.push(counter)
+    this.setState({
+      counters
+    })
+  }
+
+  loadCounters = async () => {
+    let result = await fetch('http://localhost:3001/api/v1/counters').then(response => response.json()).then((resp) => {
+      return resp
+    })
+    this.setState({
+      counters: result
+    })
   }
 
   render() {
@@ -33,8 +55,8 @@ class Menu extends Component {
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
               <a className="navbar-brand" href="/"><span className="green-text">Counters</span> Admin Test.</a>
-              <div class="navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav ml-auto ">{/*mt-2 mt-lg-0*/}
+              <div className="navbar-collapse">
+                <ul className="navbar-nav ml-auto">
                   <li className={`nav-item ${!this.state.activeNav && 'active'}`}>
                     <Link className="nav-link" to="/">Dashboard</Link>
                   </li>
@@ -51,6 +73,13 @@ class Menu extends Component {
                 <Route path="/counters">
                   <Counters 
                     handleActiveNav = { this.handleActiveNav }
+                    counters = {this.state.counters}
+                  />
+                </Route>
+                <Route path="/counter/new">
+                  <CounterForm 
+                    actions={this.props.actions}
+                    handleCountersChange = { this.handleCountersChange }
                   />
                 </Route>
                 <Route path="/">

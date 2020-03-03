@@ -4,17 +4,14 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import { Link } from "react-router-dom";
 import left from '../assets/img/arrow-left.svg';
 import right from '../assets/img/arrow-right.svg';
-import edit from '../assets/img/edit.svg';
 import trash from '../assets/img/trash.svg';
 
 class CountersTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
-    this.editButtonFormatter = this.editButtonFormatter.bind(this);
     this.deleteButtonFormatter = this.deleteButtonFormatter.bind(this);
   }
 
@@ -52,19 +49,10 @@ class CountersTable extends Component {
       text: 'Count',
       dbclickToEdit: true,
       sort: true,
-      sortCaret: this.sortCaret
-    }, {
-      dataField: '',
-      text: 'Edit',
-      align: 'center',
-      dbclickToEdit: false,
-      formatter: this.editButtonFormatter,
-      events: {
-        onClick: (e, column, columnIndex, row, rowIndex) => {
-          console.log(row);
-        }
-      }
-    } , {
+      sortCaret: this.sortCaret,
+      footer: '',
+      footerFormatter: this.sumFormatter
+    },  {
       dataField: '',
       text: 'Delete',
       align: 'center',
@@ -96,16 +84,6 @@ class CountersTable extends Component {
     return options;
   }
   
-  editButtonFormatter = (cell, row) => {
-    return (
-      <div className="actions mb-0">
-        <button className="member-link btn" title="Edit">
-          <img src={edit}></img>
-        </button>
-      </div>
-    );
-  }
-
   deleteButtonFormatter = (cell, row) => {
     return (
       <div className="actions mb-0">
@@ -115,6 +93,14 @@ class CountersTable extends Component {
       </div>
     );
   }
+
+  sumFormatter = (column, colIndex) => {
+    const { counters } = this.props;
+    const value = counters.length > 0 ? counters.map(o => o.count).reduce((a, b) => parseInt(a) + parseInt(b)) : 0;
+    return (
+      <h5><strong>Counters Total: { value }</strong></h5>
+    );
+  }  
 
   render() {
     const { SearchBar } = Search;
