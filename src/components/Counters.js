@@ -20,7 +20,6 @@ class Counters extends Component {
     const counters = this.props.counters.filter((o) => { return o.id !== counter.id});
     
     await del('/api/v1/counter', counter);
-    this.props.handleCountersChange(counters);
     this.props.actions.deleteCounter(counter.id);
   }
 
@@ -30,7 +29,6 @@ class Counters extends Component {
 
   handleIncRequest = async (counter) => {
     const result = await post('/api/v1/counter/inc', counter);
-    this.props.handleCountersChange(result);
     this.props.actions.incCounter(counter.id);
   }
 
@@ -40,7 +38,6 @@ class Counters extends Component {
 
   handleDecRequest = async (counter) => {
     const result = await post('/api/v1/counter/dec', counter);
-    this.props.handleCountersChange(result);
     this.props.actions.decCounter(counter.id);
   }
 

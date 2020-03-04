@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import { Link } from "react-router-dom";
 import { confirmAlert } from 'react-confirm-alert';
 import DeleteAlert from './DeleteAlert';
 import left from '../assets/img/arrow-left.svg';

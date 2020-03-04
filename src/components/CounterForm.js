@@ -9,7 +9,6 @@ class CounterForm extends Component {
     this.state = {
       alert: false,
       validated: false,
-      validForm: false,
       title: '',
       count: 0
     };
@@ -26,14 +25,13 @@ class CounterForm extends Component {
   };
 
   handleSubmit = (event) => {
-    const { title, count, validForm } = this.state;
+    const { title, count } = this.state;
     const form = event.currentTarget;
+    event.preventDefault();
+    event.stopPropagation();
 
     if (form.checkValidity()) {
       this.handleRequest({ title, count });
-    } else {
-      event.preventDefault();
-      event.stopPropagation();
     }
     this.setState({
       validated: form.checkValidity()
@@ -44,7 +42,6 @@ class CounterForm extends Component {
     const result = await post('/api/v1/counter', data);
 
     this.setAlert(true);
-    this.props.handleCountersAdded(result);
     this.props.actions.addCounter(result.id, result.title, result.count);
   };
 

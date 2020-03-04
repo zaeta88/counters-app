@@ -22,8 +22,6 @@ class Main extends Component {
       activeNav: false
     };
     this.handleActiveNav = this.handleActiveNav.bind(this);
-    this.handleCountersChange = this.handleCountersChange.bind(this);
-    this.handleCountersAdded = this.handleCountersAdded.bind(this);
   }
 
   componentDidMount() {
@@ -33,19 +31,6 @@ class Main extends Component {
   handleActiveNav = (value) => {
     this.setState({
       activeNav: value
-    })
-  }
-
-  handleCountersChange = (counters) => {
-    this.setState({
-      counters
-    })
-  }
-
-  handleCountersAdded = (counter) => {
-    let counters = this.state.counters.push(counter)
-    this.setState({
-      counters
     })
   }
 
@@ -81,16 +66,14 @@ class Main extends Component {
                 <Route path="/counters">
                   <Counters 
                     actions = {this.props.actions}
-                    counters = {this.state.counters}
+                    counters = {this.props.counters}
                     handleActiveNav = { this.handleActiveNav }
-                    handleCountersChange = { this.handleCountersChange }
                   />
                 </Route>
                 <Route path="/counter/new">
                   <CounterForm 
                     actions = {this.props.actions}
                     handleActiveNav = { this.handleActiveNav }
-                    handleCountersAdded = { this.handleCountersAdded }
                   />
                 </Route>
                 <Route path="/">

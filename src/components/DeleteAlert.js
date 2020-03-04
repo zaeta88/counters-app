@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import './DeleteAlert.css';
 
 class DeleteAlert extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+  
   render() {
     const { row } = this.props;
     return (
