@@ -4,6 +4,7 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { confirmAlert } from 'react-confirm-alert';
 import DeleteAlert from './DeleteAlert';
+import CountersFilter from './CountersFilter';
 import left from '../assets/img/arrow-left.svg';
 import right from '../assets/img/arrow-right.svg';
 import trash from '../assets/img/trash.svg';
@@ -15,6 +16,11 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 class CountersTable extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      counters: this.props.counters
+    }
+    this.countersLessThan = this.countersLessThan.bind(this);
+    this.countersGreaterThan = this.countersGreaterThan.bind(this);
   }
 
   sortCaret = (order, column) => {
@@ -140,16 +146,30 @@ class CountersTable extends Component {
   }
 
   sumFormatter = (column, colIndex) => {
-    const { counters } = this.props;
+    const { counters } = this.state;
     const value = counters.length > 0 ? counters.map(o => o.count).reduce((a, b) => parseInt(a) + parseInt(b)) : 0;
     return (
       <h5><strong>Counters Total: { value }</strong></h5>
     );
-  }  
+  }
+
+  countersLessThan = (value) => {
+    let counters = value === '' ? this.props.counters : this.state.counters.filter((o) => parseInt(o.count) < parseInt(value));
+    this.setState({ counters: counters })
+  }
+
+  countersGreaterThan = (value) => {
+    let counters = value === '' ? this.props.counters : this.state.counters.filter((o) => parseInt(o.count) > parseInt(value));
+    this.setState({ counters: counters });
+  }
+
+  emptyFilters = () => {
+    this.setState({ counters: [] });
+  }
 
   render() {
     const { SearchBar } = Search;
-    const { counters } = this.props;
+    const { counters } =  this.state;
     
     return (
       <div className="content-wrapper container">
@@ -162,8 +182,12 @@ class CountersTable extends Component {
           {
             props => (
               <div>
+                <CountersFilter 
+                  countersLessThan = { this.countersLessThan }
+                  countersGreaterThan = { this.countersGreaterThan }
+                  emptyFilters = { this.emptyFilters }
+                />
                 <SearchBar { ...props.searchProps } />
-                <hr />
                 <BootstrapTable
                   { ...props.baseProps }
                   noDataIndication="Empty Table"

@@ -1,0 +1,21 @@
+.btn-filters {
+  background: transparent;
+  border: none;
+  margin: 5px 10px;
+}
+
+.btn-filters img {
+  height: 25px;
+}
+
+.sidebar {
+  position: absolute;
+}
+
+.sidebar .form-group {
+  margin-bottom: 0;
+}
+
+.sidebar .form-group .col-md-6 {
+  padding-top: 5px;
+}
