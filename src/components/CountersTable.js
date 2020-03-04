@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
-import cellEditFactory from 'react-bootstrap-table2-editor';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { Link } from "react-router-dom";
 import { confirmAlert } from 'react-confirm-alert';
-import { del } from '../fetcher';
 import DeleteAlert from './DeleteAlert';
 import left from '../assets/img/arrow-left.svg';
 import right from '../assets/img/arrow-right.svg';
 import trash from '../assets/img/trash.svg';
+import like from '../assets/img/like.svg';
+import dislike from '../assets/img/dislike.svg';
 import './CountersTable.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class CountersTable extends Component {
   constructor(props) {
     super(props);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   sortCaret = (order, column) => {
@@ -32,44 +31,48 @@ class CountersTable extends Component {
     </span>
   );
 
-  handleRequest = async (counter) => {
-    const counters = this.props.counters.filter((o) => { return o.id !== counter.id});
-    
-    await del('/api/v1/counter', counter);
-    this.props.handleCountersChange(counters);
-    this.props.actions.deleteCounter(counter.id);
-  }
-
-  handleDelete = (counter) => {
-    this.handleRequest(counter)
-  }
-
   tableColumns = () => {
     const columns = [{
       dataField: 'id',
       text: 'ID',
-      dbclickToEdit: true,
       sort: true,
       sortCaret: this.sortCaret
     }, {
       dataField: 'title',
       text: 'Title',
-      dbclickToEdit: true,
       sort: true,
       sortCaret: this.sortCaret
     }, {
       dataField: 'count',
       text: 'Count',
-      dbclickToEdit: true,
       sort: true,
       sortCaret: this.sortCaret,
       footer: '',
       footerFormatter: this.sumFormatter
     },  {
       dataField: '',
+      text: 'Inc',
+      align: 'center',
+      formatter: this.plusButtonFormatter,
+      events: {
+        onClick: (e, column, columnIndex, row, rowIndex) => {
+          this.props.handleIncrease(row)
+        }
+      }
+    },  {
+      dataField: '',
+      text: 'Dec',
+      align: 'center',
+      formatter: this.lessButtonFormatter,
+      events: {
+        onClick: (e, column, columnIndex, row, rowIndex) => {
+          this.props.handleDecrease(row)
+        }
+      }
+    }, {
+      dataField: '',
       text: 'Delete',
       align: 'center',
-      dbclickToEdit: false,
       formatter: this.deleteButtonFormatter,
       events: {
         onClick: (e, column, columnIndex, row, rowIndex) => {
@@ -77,7 +80,7 @@ class CountersTable extends Component {
             customUI: ({ onClose }) => {
               return (
                 <DeleteAlert 
-                  handleDelete = { this.handleDelete }
+                  handleDelete = { this.props.handleDelete }
                   onClose = { onClose }
                   row = { row }
                 />
@@ -106,11 +109,31 @@ class CountersTable extends Component {
     };
     return options;
   }
+
+  plusButtonFormatter = (cell, row) => {
+    return (
+      <div className="actions mb-0 like-dislike">
+        <button className="member-link btn like" title="Increase count">
+          <img src={like}/>
+        </button>
+      </div>
+    );
+  }
+
+  lessButtonFormatter = (cell, row) => {
+    return (
+      <div className="actions mb-0 like-dislike">
+        <button className="member-link btn dislike" title="Decrease count">
+          <img src={dislike}/>
+        </button>
+      </div>
+    );
+  }
   
   deleteButtonFormatter = (cell, row) => {
     return (
       <div className="actions mb-0">
-        <button className="member-link btn" title="Delete">
+        <button className="member-link btn delete-btn" title="Delete">
           <img src={trash}></img>
         </button>
       </div>
@@ -145,7 +168,6 @@ class CountersTable extends Component {
                 <BootstrapTable
                   { ...props.baseProps }
                   noDataIndication="Empty Table"
-                  cellEdit={ cellEditFactory({ mode: 'dbclick' }) }
                   pagination={ paginationFactory(this.tablePaginationOptions(counters)) }
                   hover
                 />

@@ -1,4 +1,4 @@
-let reducer = (state, action) => {
+let reducer = (state = {counters: []}, action) => {
   switch (action.type) {
     case 'ADD_COUNTER':
       return Object.assign({}, state, {
@@ -12,14 +12,14 @@ let reducer = (state, action) => {
       return Object.assign({}, state, {
         counters: state.counters.map((counter) => {
           return counter.id === action.id ?
-          Object.assign({}, counter, {count: counter.count++}) : counter
+          Object.assign({}, counter, {count: parseInt(counter.count)+1}) : counter
         })
       })
     case 'DEC_COUNTER':
       return Object.assign({}, state, {
         counters: state.counters.map((counter) => {
           return counter.id === action.id ?
-          Object.assign({}, counter, {count: counter.count--}) : counter
+          Object.assign({}, counter, {count: parseInt(counter.count)-1}) : counter
         })
       })
     case 'DELETE_COUNTER':

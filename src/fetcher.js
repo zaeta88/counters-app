@@ -7,7 +7,7 @@ const get = (path) => {
 }
 
 const request = (path, data, method) => {
-  fetch(baseUrl + path, {
+  return fetch(baseUrl + path, {
     method: method,
     headers: {
       'Accept': 'application/json',
@@ -17,7 +17,7 @@ const request = (path, data, method) => {
   }).then(response => response.json()).then((resp) => {
     return resp;
   }).catch((error) => {
-    console.log('EEEEEEEEEEEEEEEEEEEE',  error)
+    console.log(error)
   });
 }
 

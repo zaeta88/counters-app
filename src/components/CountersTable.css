@@ -4,12 +4,11 @@
 }
 
 .actions .member-link {
-  padding: 0 5px;
   border-radius: 3px;
   display: inline-block;
   cursor: pointer;
-  padding: 4px  8px;
-  margin: 0 4px;
+  padding: 4px 0;
+  margin: 0;
   background-color: transparent;
   text-decoration: none;
 }
@@ -99,7 +98,11 @@
   border-bottom: 2px solid #5bc66a;
 }
 
-.table-bordered thead tr th:last-child, .table-bordered thead tr th:nth-child(4) {
+.actions button.delete-btn {
+  margin-right: 12px;
+}
+
+.table-bordered thead tr th:last-child, .table-bordered thead tr th:nth-child(4), .table-bordered thead tr th:nth-child(5) {
   width: 50px;
 }
 

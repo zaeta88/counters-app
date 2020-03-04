@@ -22,7 +22,9 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return state
+  return {
+    counters: state.counters
+  }
 }
 function mapDispatchToProps(dispatch) {
   return {

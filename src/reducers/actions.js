@@ -15,7 +15,7 @@ let actions = {
   },
   decCounter: function(id) {
     return {
-      type: 'INC_COUNTER',
+      type: 'DEC_COUNTER',
       id: id
     }
   },

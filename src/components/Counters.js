@@ -3,6 +3,7 @@ import './Counters.css';
 import CountersTable from './CountersTable';
 import add from '../assets/img/add.svg';
 import { Link } from "react-router-dom";
+import { del, post } from '../fetcher';
 
 class Counters extends Component {
   constructor(props) {
@@ -13,6 +14,40 @@ class Counters extends Component {
 
   componentDidMount() {
     this.props.handleActiveNav(true)
+  }
+
+  handleDeleteRequest = async (counter) => {
+    const counters = this.props.counters.filter((o) => { return o.id !== counter.id});
+    
+    await del('/api/v1/counter', counter);
+    this.props.handleCountersChange(counters);
+    this.props.actions.deleteCounter(counter.id);
+  }
+
+  handleDelete = (counter) => {
+    this.handleDeleteRequest(counter);
+  }
+
+  handleIncRequest = async (counter) => {
+    const result = await post('/api/v1/counter/inc', counter);
+    this.props.handleCountersChange(result);
+    this.props.actions.incCounter(counter.id);
+  }
+
+  handleIncrease = (counter) => {
+    this.handleIncRequest(counter);
+  }
+
+  handleDecRequest = async (counter) => {
+    const result = await post('/api/v1/counter/dec', counter);
+    this.props.handleCountersChange(result);
+    this.props.actions.decCounter(counter.id);
+  }
+
+  handleDecrease = (counter) => {
+    if (counter.count > 0) {
+      this.handleDecRequest(counter)
+    }
   }
   
   render() {
@@ -37,9 +72,11 @@ class Counters extends Component {
           </div>
           <div className="content row mt-4">
             <CountersTable 
-              actions = { this.props.actions }
               counters = { counters }
               handleCountersChange = { this.props.handleCountersChange }
+              handleDelete = { this.handleDelete }
+              handleIncrease = { this.handleIncrease }
+              handleDecrease = { this.handleDecrease }
             />
           </div>
         </div>
