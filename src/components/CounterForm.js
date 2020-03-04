@@ -18,6 +18,14 @@ class CounterForm extends Component {
     this.props.handleActiveNav(true)
   }
 
+  clearForm = () => {
+    this.setAlert(true);
+    this.setState({
+      count: 0,
+      title: ' '
+    });
+  }
+
   handleChange = (event) =>{
     this.setState({ 
       [event.target.name]:event.target.value 
@@ -41,7 +49,7 @@ class CounterForm extends Component {
   handleRequest = async (data) => {
     const result = await post('/api/v1/counter', data);
 
-    this.setAlert(true);
+    this.clearForm();
     this.props.actions.addCounter(result.id, result.title, result.count);
   };
 
@@ -75,7 +83,8 @@ class CounterForm extends Component {
                       <Form.Control 
                         type="text" 
                         placeholder="Title" 
-                        name="title" 
+                        name="title"
+                        value={title}
                         onChange={this.handleChange} 
                         required 
                       />
@@ -91,6 +100,7 @@ class CounterForm extends Component {
                         placeholder="Count Value" 
                         min='0'
                         name="count" 
+                        value={count}
                         onChange={this.handleChange} 
                         required 
                       />

@@ -5,7 +5,7 @@ const Notfound = () => (
   <div className="card">
     <div className="card-body" style={{ marginTop: '5%' }}>
       <center>
-        <img id="error-img" src={clouds} alt="Error" style={{ width: '5%' }} />
+        <img id="error-img" src={clouds} alt="Clouds icon, error" style={{ width: '5%' }} />
       </center>
       <center style={{
         lineHeight: '18px',

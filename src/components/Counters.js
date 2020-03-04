@@ -8,17 +8,13 @@ import { del, post } from '../fetcher';
 class Counters extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
   }
 
   componentDidMount() {
     this.props.handleActiveNav(true)
   }
 
-  handleDeleteRequest = async (counter) => {
-    const counters = this.props.counters.filter((o) => { return o.id !== counter.id});
-    
+  handleDeleteRequest = async (counter) => {    
     await del('/api/v1/counter', counter);
     this.props.actions.deleteCounter(counter.id);
   }
@@ -61,7 +57,7 @@ class Counters extends Component {
               <div className="action-items row">
                 <span className="item">
                   <Link className="right-button btn btn-outline-success" to="/counter/new">
-                    <img src={add}></img> Add Counter
+                    <img src={add} alt="Plus Symbol, Add new counter."></img> Add Counter
                   </Link>
                 </span>
               </div>

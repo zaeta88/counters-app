@@ -17,16 +17,17 @@ class CountersTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      counters: this.props.counters
+      counters: this.props.counters,
+      filter: false
     }
     this.countersLessThan = this.countersLessThan.bind(this);
     this.countersGreaterThan = this.countersGreaterThan.bind(this);
   }
 
   sortCaret = (order, column) => {
-    if (!order) return (<span className="carret"><img src={left}/><img src={right}/></span>);
-    else if (order === 'asc') return (<span className="carret"><img src={left}/></span>);
-    else if (order === 'desc') return (<span className="carret"><img src={right}/></span>);
+    if (!order) return (<span className="carret"><img src={left} alt="Down Arrow."/><img src={right} alt="Up Arrow."/></span>);
+    else if (order === 'asc') return (<span className="carret"><img src={left} alt="Down Arrow."/></span>);
+    else if (order === 'desc') return (<span className="carret"><img src={right} alt="Up Arrow."/></span>);
     return null;
   }
 
@@ -119,7 +120,7 @@ class CountersTable extends Component {
     return (
       <div className="actions mb-0 like-dislike">
         <button className="member-link btn like" title="Increase count">
-          <img src={like}/>
+          <img src={like} alt="Like Icon, add a like!"/>
         </button>
       </div>
     );
@@ -129,7 +130,7 @@ class CountersTable extends Component {
     return (
       <div className="actions mb-0 like-dislike">
         <button className="member-link btn dislike" title="Decrease count">
-          <img src={dislike}/>
+          <img src={dislike} alt="Dislike Icon, remove a like!"/>
         </button>
       </div>
     );
@@ -139,7 +140,7 @@ class CountersTable extends Component {
     return (
       <div className="actions mb-0">
         <button className="member-link btn delete-btn" title="Delete">
-          <img src={trash}></img>
+          <img src={trash} alt="Trash Icon, delete counter!"></img>
         </button>
       </div>
     );
@@ -154,13 +155,33 @@ class CountersTable extends Component {
   }
 
   countersLessThan = (value) => {
-    let counters = value === '' ? this.props.counters : this.state.counters.filter((o) => parseInt(o.count) < parseInt(value));
-    this.setState({ counters: counters })
+    let counters = [];
+    let filter = true;
+    if (value === '') {
+      filter = false
+      counters = this.props.counters
+    } else {
+      counters = this.props.counters.filter((o) => parseInt(o.count) < parseInt(value));
+    }
+    this.setState({ 
+      counters: counters, 
+      filter: filter 
+    });
   }
 
   countersGreaterThan = (value) => {
-    let counters = value === '' ? this.props.counters : this.state.counters.filter((o) => parseInt(o.count) > parseInt(value));
-    this.setState({ counters: counters });
+    let counters = [];
+    let filter = true;
+    if (value === '') {
+      filter = false
+      counters = this.props.counters
+    } else {
+      counters = this.props.counters.filter((o) => parseInt(o.count) > parseInt(value));
+    }
+    this.setState({ 
+      counters: counters, 
+      filter: filter 
+    });
   }
 
   emptyFilters = () => {
@@ -169,7 +190,7 @@ class CountersTable extends Component {
 
   render() {
     const { SearchBar } = Search;
-    const { counters } =  this.state;
+    const counters =  this.state.filter ? this.state.counters : this.props.counters;
     
     return (
       <div className="content-wrapper container">

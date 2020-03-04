@@ -26,7 +26,9 @@ class CountersFilter extends Component {
   render() {
     return (
       <div className="sidebar row">
-          <button className="btn btn-filters" onClick={this.toggleMenu}><img src={filter}/></button>
+          <button className="btn btn-filters" onClick={this.toggleMenu}>
+            <img src={filter} alt="Filter Icon, Filter counters table."/>
+          </button>
           { this.state.visible && 
             <Form.Group as={Row} controlId="validationCount">
               <Col md="6">

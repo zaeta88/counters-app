@@ -91,7 +91,7 @@ class Main extends Component {
         <div className="footer mt-5 text-right" id="footer">
           <div className="container">
             <p>Powered by <a className="font-weight-bold" href="https://cornershopapp.com/es-cl">Cornershop</a> 
-            <img src={cornershop}></img></p>
+            <img src={cornershop} alt="Cornershop app icon, go there!"></img></p>
           </div>
         </div>
       </div>
