@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './CounterForm.css';
-import { Form, Col, Button } from 'react-bootstrap';
+import { Form, Col, Button, Alert } from 'react-bootstrap';
+import { post } from '../fetcher';
 
 class CounterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      alert: false,
       validated: false,
       validForm: false,
       title: '',
@@ -35,26 +37,28 @@ class CounterForm extends Component {
   }
 
   handleRequest = async (data) => {
-    const result = await fetch('http://localhost:3001/api/v1/counter', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }).then(response => response.json()).then((resp) => {
-      return resp
-    })
-    
-    this.props.handleCountersChange(result)
+    const result = await post('/api/v1/counter', data);
+
+    this.setAlert(true);
+    this.props.handleCountersAdded(result);
     this.props.actions.addCounter(result.id, result.title, result.count);
   };
 
+  setAlert = (value) => {
+    this.setState({
+      alert: value
+    })
+  }
 
   render() {
-    const { validated, title, count } = this.state;
+    const { alert, validated, title, count } = this.state;
     return (
       <div className="counters">
+        { alert &&
+            <Alert variant="success"  onClose={() => this.setAlert(false)} dismissible>
+              <Alert.Heading>Counter Successfully Saved!</Alert.Heading>
+            </Alert>        
+        }
         <div className="site-section pb-0">
           <div className="title-bar row">
             <div className="titlebar-left col-md-6">

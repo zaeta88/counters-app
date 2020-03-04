@@ -1,3 +1,8 @@
+.react-confirm-alert-body {
+  font-family: "Inconsolata", monosapce;
+  color: #000;
+}
+
 .actions .member-link {
   padding: 0 5px;
   border-radius: 3px;
@@ -25,15 +30,15 @@
   height: 22px;
 }
 
-.btn-secondary.dropdown-toggle {
+.btn-secondary.dropdown-toggle, .react-confirm-alert-body > .react-confirm-alert-button-group button {
   color: #28a745;
   background-color: transparent;
   background-image: none;
-  border-color: #28a745;
+  border: 1px solid #28a745;
   margin-right: 10px;
 }
 
-.btn-secondary:hover.dropdown-toggle, .btn-secondary:active.dropdown-toggle {
+.btn-secondary:hover.dropdown-toggle, .btn-secondary:active.dropdown-toggle, .react-confirm-alert-body > .react-confirm-alert-button-group button:hover, .react-confirm-alert-body > .react-confirm-alert-button-group button:active {
   color: #fff;
   background-color: #28a745;
 }

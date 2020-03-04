@@ -37,7 +37,9 @@ class Counters extends Component {
           </div>
           <div className="content row mt-4">
             <CountersTable 
+              actions = { this.props.actions }
               counters = { counters }
+              handleCountersChange = { this.props.handleCountersChange }
             />
           </div>
         </div>

@@ -8,3 +8,8 @@ input.form-control {
   border-right: none;
   border-radius: 0;
 }
+
+.alert-success {
+  color: #5bc66a;
+  margin: 15px 15% 0;
+}

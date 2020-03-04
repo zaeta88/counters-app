@@ -11,6 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { get } from '../../fetcher';
 
 class Menu extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Menu extends Component {
     };
     this.handleActiveNav = this.handleActiveNav.bind(this);
     this.handleCountersChange = this.handleCountersChange.bind(this);
+    this.handleCountersAdded = this.handleCountersAdded.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +34,13 @@ class Menu extends Component {
     })
   }
 
-  handleCountersChange = (counter) => {
+  handleCountersChange = (counters) => {
+    this.setState({
+      counters
+    })
+  }
+
+  handleCountersAdded = (counter) => {
     let counters = this.state.counters.push(counter)
     this.setState({
       counters
@@ -40,9 +48,7 @@ class Menu extends Component {
   }
 
   loadCounters = async () => {
-    let result = await fetch('http://localhost:3001/api/v1/counters').then(response => response.json()).then((resp) => {
-      return resp
-    })
+    let result = await get('/api/v1/counters')
     this.setState({
       counters: result
     })
@@ -72,14 +78,16 @@ class Menu extends Component {
               <Switch>
                 <Route path="/counters">
                   <Counters 
-                    handleActiveNav = { this.handleActiveNav }
+                    actions = {this.props.actions}
                     counters = {this.state.counters}
+                    handleActiveNav = { this.handleActiveNav }
+                    handleCountersChange = { this.handleCountersChange }
                   />
                 </Route>
                 <Route path="/counter/new">
                   <CounterForm 
-                    actions={this.props.actions}
-                    handleCountersChange = { this.handleCountersChange }
+                    actions = {this.props.actions}
+                    handleCountersAdded = { this.handleCountersAdded }
                   />
                 </Route>
                 <Route path="/">

@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
-import './CountersTable.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { Link } from "react-router-dom";
+import { confirmAlert } from 'react-confirm-alert';
+import { del } from '../fetcher';
+import DeleteAlert from './DeleteAlert';
 import left from '../assets/img/arrow-left.svg';
 import right from '../assets/img/arrow-right.svg';
 import trash from '../assets/img/trash.svg';
+import './CountersTable.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class CountersTable extends Component {
   constructor(props) {
     super(props);
-    this.deleteButtonFormatter = this.deleteButtonFormatter.bind(this);
-  }
-
-  componentDidMount() {
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   sortCaret = (order, column) => {
@@ -30,6 +31,18 @@ class CountersTable extends Component {
       Showing { from } to { to } of { size } Results
     </span>
   );
+
+  handleRequest = async (counter) => {
+    const counters = this.props.counters.filter((o) => { return o.id !== counter.id});
+    
+    await del('/api/v1/counter', counter);
+    this.props.handleCountersChange(counters);
+    this.props.actions.deleteCounter(counter.id);
+  }
+
+  handleDelete = (counter) => {
+    this.handleRequest(counter)
+  }
 
   tableColumns = () => {
     const columns = [{
@@ -60,7 +73,17 @@ class CountersTable extends Component {
       formatter: this.deleteButtonFormatter,
       events: {
         onClick: (e, column, columnIndex, row, rowIndex) => {
-          console.log(row);
+          confirmAlert({
+            customUI: ({ onClose }) => {
+              return (
+                <DeleteAlert 
+                  handleDelete = { this.handleDelete }
+                  onClose = { onClose }
+                  row = { row }
+                />
+              );
+            }
+          });
         }
       }
     }];
