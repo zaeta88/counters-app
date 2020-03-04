@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from './reducers/actions'
 import './App.css';
-import Menu from './components/shared/Menu';
+import Main from './components/Main';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class App extends Component {
 
   render() {
     return ( 
-    <Menu
+    <Main
       counters = {this.props.counters}
       actions={this.props.actions}
     /> );

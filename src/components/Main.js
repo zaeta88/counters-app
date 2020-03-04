@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import './Menu.css';
-import Dashboard from '../Dashboard';
-import Counters from '../Counters';
-import CounterForm from '../CounterForm';
-import NotFound from './NotFound';
-import cornershop from '../../assets/img/cornershop.png';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
-import { get } from '../../fetcher';
+import Dashboard from './Dashboard';
+import Counters from './Counters';
+import CounterForm from './CounterForm';
+import NotFound from './shared/NotFound';
+import { get } from '../fetcher';
+import cornershop from '../assets/img/cornershop.png';
+import './Main.css';
 
-class Menu extends Component {
+
+
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -87,6 +89,7 @@ class Menu extends Component {
                 <Route path="/counter/new">
                   <CounterForm 
                     actions = {this.props.actions}
+                    handleActiveNav = { this.handleActiveNav }
                     handleCountersAdded = { this.handleCountersAdded }
                   />
                 </Route>
@@ -113,4 +116,4 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+export default Main;

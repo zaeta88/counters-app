@@ -5,7 +5,7 @@ import CounterForm from './CounterForm';
 
 describe('React.Component CounterForm', () => {
   it('should render correctly', () => {
-    const component = shallow(<CounterForm />);
+    const component = shallow(<CounterForm handleActiveNav = { () => {} } />);
     expect(component).toMatchSnapshot();
   });
 });

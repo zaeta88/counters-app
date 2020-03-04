@@ -15,6 +15,10 @@ class CounterForm extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.handleActiveNav(true)
+  }
+
   handleChange = (event) =>{
     this.setState({ 
       [event.target.name]:event.target.value 
