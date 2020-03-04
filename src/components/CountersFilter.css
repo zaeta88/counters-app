@@ -19,3 +19,9 @@
 .sidebar .form-group .col-md-6 {
   padding-top: 5px;
 }
+
+@media (max-width: 415px) {
+  .sidebar {
+    background-color: #fff;
+  }
+}

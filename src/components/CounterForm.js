@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './CounterForm.css';
 import { Form, Col, Button, Alert } from 'react-bootstrap';
 import { post } from '../fetcher';
@@ -125,5 +126,10 @@ class CounterForm extends Component {
     );
   }
 }
+
+CounterForm.propTypes = {
+  handleActiveNav: PropTypes.func,
+  actions: PropTypes.objectOf(PropTypes.func)
+};
 
 export default CounterForm;

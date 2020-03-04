@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './DeleteAlert.css';
 
 class DeleteAlert extends Component {
-  
+
   render() {
     const { row } = this.props;
     return (
@@ -26,5 +27,11 @@ class DeleteAlert extends Component {
     );
   }
 }
+
+DeleteAlert.propTypes = {
+  row: PropTypes.objectOf(PropTypes.string),
+  handleDelete: PropTypes.func,
+  onClose: PropTypes.func
+};
 
 export default DeleteAlert;

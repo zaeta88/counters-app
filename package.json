@@ -7,15 +7,17 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "server": "node-env-run server --exec nodemon | pino-colada",
-    "start": "run-p server start:web"
+    "start": "run-p server start:web",
+    "lint": "eslint --ext .js src/components"
   },
-  "author": "Javier Vasquez",
+  "author": "Rafael Camacho",
   "license": "ISC",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
     "cors": "^2.8.5",
+    "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-bootstrap-table-next": "^3.3.5",
@@ -47,10 +49,14 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.22.0",
+    "@typescript-eslint/parser": "^2.22.0",
     "body-parser": "^1.19.0",
     "compression": "^1.6.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.18.3",
     "express": "^4.17.1",
     "express-pino-logger": "^4.0.0",
     "lodash": "^4.17.4",

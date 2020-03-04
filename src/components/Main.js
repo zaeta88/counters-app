@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   BrowserRouter as Router,
   Switch,
@@ -98,5 +99,10 @@ class Main extends Component {
     );
   }
 }
+
+Main.propTypes = {
+  actions: PropTypes.objectOf(PropTypes.func),
+  counters: PropTypes.array
+};
 
 export default Main;

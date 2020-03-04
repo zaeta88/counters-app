@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Dashboard.css';
 
 class Dashboard extends Component {
@@ -32,5 +33,9 @@ class Dashboard extends Component {
     );
   }
 }
+
+Dashboard.propTypes = {
+  handleActiveNav:  PropTypes.func
+};
 
 export default Dashboard;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Col, Row } from 'react-bootstrap';
 import './CountersFilter.css';
 import filter from '../assets/img/filter.svg';
@@ -11,7 +12,7 @@ class CountersFilter extends Component {
     };
   }
 
-  handleChange = (event) =>{
+  handleChange = (event) => {
     if(event.target.name === 'greater') {
       this.props.countersGreaterThan(event.target.value)
     } else {
@@ -31,7 +32,7 @@ class CountersFilter extends Component {
           </button>
           { this.state.visible && 
             <Form.Group as={Row} controlId="validationCount">
-              <Col md="6">
+              <Col md="6" xs="6">
                 <Form.Control 
                   type="number" 
                   placeholder="Greater Than >" 
@@ -40,7 +41,7 @@ class CountersFilter extends Component {
                   onChange={this.handleChange}
                 />
               </Col>
-              <Col md="6">
+              <Col md="6" xs="6">
                 <Form.Control 
                   type="number" 
                   placeholder="Less Than <" 
@@ -55,5 +56,10 @@ class CountersFilter extends Component {
     );
   }
 }
+
+CountersFilter.propTypes = {
+  countersGreaterThan: PropTypes.func,
+  countersLessThan: PropTypes.func
+};
 
 export default CountersFilter;

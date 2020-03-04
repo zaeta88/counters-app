@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -24,6 +25,7 @@ class CountersTable extends Component {
     this.countersGreaterThan = this.countersGreaterThan.bind(this);
   }
 
+  /* eslint-disable no-unused-vars */
   sortCaret = (order, column) => {
     if (!order) return (<span className="carret"><img src={left} alt="Down Arrow."/><img src={right} alt="Up Arrow."/></span>);
     else if (order === 'asc') return (<span className="carret"><img src={left} alt="Down Arrow."/></span>);
@@ -153,6 +155,7 @@ class CountersTable extends Component {
       <h5><strong>Counters Total: { value }</strong></h5>
     );
   }
+  /* eslint-enable no-unused-vars */
 
   countersLessThan = (value) => {
     let counters = [];
@@ -223,5 +226,12 @@ class CountersTable extends Component {
     );
   }
 }
+
+CountersTable.propTypes = {
+  handleIncrease: PropTypes.func,
+  handleDecrease: PropTypes.func,
+  handleDelete: PropTypes.func,
+  counters: PropTypes.array
+};
 
 export default CountersTable;

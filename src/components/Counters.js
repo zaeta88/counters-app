@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Counters.css';
 import CountersTable from './CountersTable';
 import add from '../assets/img/add.svg';
@@ -6,10 +7,6 @@ import { Link } from "react-router-dom";
 import { del, post } from '../fetcher';
 
 class Counters extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.handleActiveNav(true)
   }
@@ -24,7 +21,7 @@ class Counters extends Component {
   }
 
   handleIncRequest = async (counter) => {
-    const result = await post('/api/v1/counter/inc', counter);
+    await post('/api/v1/counter/inc', counter);
     this.props.actions.incCounter(counter.id);
   }
 
@@ -33,7 +30,7 @@ class Counters extends Component {
   }
 
   handleDecRequest = async (counter) => {
-    const result = await post('/api/v1/counter/dec', counter);
+    await post('/api/v1/counter/dec', counter);
     this.props.actions.decCounter(counter.id);
   }
 
@@ -77,5 +74,12 @@ class Counters extends Component {
     );
   }
 }
+
+Counters.propTypes = {
+  handleActiveNav: PropTypes.func,
+  handleCountersChange: PropTypes.func,
+  actions: PropTypes.objectOf(PropTypes.func),
+  counters: PropTypes.array
+};
 
 export default Counters;
