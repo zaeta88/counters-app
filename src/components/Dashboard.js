@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Dashboard.css';
+import i18n from '../i18n';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -18,14 +19,14 @@ class Dashboard extends Component {
       <div className="dashboard">
         <div className="site-section pb-0">
           <div className="titlebar">
-            <h2 className="title">Dashboard</h2>
+            <h2 className="title">{i18n.t('menu.dashboard')}</h2>
           </div>
         </div>
         <div className="wrapper">
           <div className="dashboard-default-message">
             <span>
-              <span>¡Welcome to the Counters Administrator app!</span>
-              <p>Feel free to count as much as you want :)</p>
+              <span>{i18n.t('dashboard.welcome')}</span>
+              <p>{i18n.t('dashboard.feelFree')}</p>
             </span>
           </div>
         </div>

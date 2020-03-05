@@ -5,6 +5,7 @@ import CountersTable from './CountersTable';
 import add from '../assets/img/add.svg';
 import { Link } from "react-router-dom";
 import { del, post } from '../fetcher';
+import i18n from '../i18n';
 
 class Counters extends Component {
   componentDidMount() {
@@ -48,13 +49,13 @@ class Counters extends Component {
         <div className="site-section pb-0">
           <div className="title-bar row">
             <div className="titlebar-left col-md-6">
-              <h2 className="title">Counters</h2>
+              <h2 className="title">{i18n.t('menu.title')}</h2>
             </div>
             <div className="titlebar-right col-md-6">
               <div className="action-items row">
                 <span className="item">
                   <Link className="right-button btn btn-outline-success" to="/counter/new">
-                    <img src={add} alt="Plus Symbol, Add new counter."></img> Add Counter
+                    <img src={add} alt={i18n.t('counters.addIconAlt')}></img> {i18n.t('counters.add')}
                   </Link>
                 </span>
               </div>

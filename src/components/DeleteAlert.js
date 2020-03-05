@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './DeleteAlert.css';
+import i18n from '../i18n';
 
 class DeleteAlert extends Component {
 
@@ -9,8 +10,8 @@ class DeleteAlert extends Component {
     return (
       <div className="react-confirm-alert-overlay">
         <div className="react-confirm-alert-body">
-          <h1>Confirm to Delete</h1>
-          Are you sure you want to delete {row.title}?
+          <h1>{i18n.t('counters.alert.title')}</h1>
+          {i18n.t('counters.alert.message')} {row.title}?
           <div className="react-confirm-alert-button-group">
             <button
               onClick={() => {
@@ -18,9 +19,9 @@ class DeleteAlert extends Component {
                 this.props.onClose();
               }}
             >
-              Just do it!
+              {i18n.t('counters.alert.yes')}
             </button>
-            <button onClick={ this.props.onClose }>No</button>
+            <button onClick={ this.props.onClose }>{i18n.t('counters.alert.no')}</button>
           </div>
         </div>
       </div>

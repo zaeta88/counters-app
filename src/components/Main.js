@@ -13,8 +13,7 @@ import NotFound from './shared/NotFound';
 import { get } from '../fetcher';
 import cornershop from '../assets/img/cornershop.png';
 import './Main.css';
-
-
+import i18n from '../i18n';
 
 class Main extends Component {
   constructor(props) {
@@ -48,14 +47,14 @@ class Main extends Component {
         <Router>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
-              <a className="navbar-brand" href="/"><span className="green-text">Counters</span> Admin Test.</a>
+              <a className="navbar-brand" href="/"><span className="green-text">{i18n.t('menu.title')}</span> {i18n.t('menu.admin')}</a>
               <div className="navbar-collapse">
                 <ul className="navbar-nav ml-auto">
                   <li className={`nav-item ${!this.state.activeNav && 'active'}`}>
-                    <Link className="nav-link" to="/">Dashboard</Link>
+                    <Link className="nav-link" to="/">{i18n.t('menu.dashboard')}</Link>
                   </li>
                   <li className={`nav-item ${this.state.activeNav && 'active'}`}>
-                    <Link className="nav-link" to="/counters">Counters</Link>
+                    <Link className="nav-link" to="/counters">{i18n.t('menu.title')}</Link>
                   </li>
                 </ul>
               </div>
@@ -91,8 +90,8 @@ class Main extends Component {
         </Router>
         <div className="footer mt-5 text-right" id="footer">
           <div className="container">
-            <p>Powered by <a className="font-weight-bold" href="https://cornershopapp.com/es-cl">Cornershop</a> 
-            <img src={cornershop} alt="Cornershop app icon, go there!"></img></p>
+            <p>{i18n.t('footer.powered')} <a className="font-weight-bold" href="https://cornershopapp.com/es-cl">{i18n.t('footer.cornershop')}</a> 
+            <img src={cornershop} alt={i18n.t('footer.iconAlt')}></img></p>
           </div>
         </div>
       </div>

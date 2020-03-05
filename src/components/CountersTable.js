@@ -13,6 +13,7 @@ import like from '../assets/img/like.svg';
 import dislike from '../assets/img/dislike.svg';
 import './CountersTable.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import i18n from '../i18n';
 
 class CountersTable extends Component {
   constructor(props) {
@@ -27,39 +28,39 @@ class CountersTable extends Component {
 
   /* eslint-disable no-unused-vars */
   sortCaret = (order, column) => {
-    if (!order) return (<span className="carret"><img src={left} alt="Down Arrow."/><img src={right} alt="Up Arrow."/></span>);
-    else if (order === 'asc') return (<span className="carret"><img src={left} alt="Down Arrow."/></span>);
-    else if (order === 'desc') return (<span className="carret"><img src={right} alt="Up Arrow."/></span>);
+    if (!order) return (<span className="carret"><img src={left} alt={i18n.t('counters.table.upIconAlt')}/><img src={right} alt={i18n.t('counters.table.downIconAlt')}/></span>);
+    else if (order === 'asc') return (<span className="carret"><img src={left} alt={i18n.t('counters.table.upIconAlt')}/></span>);
+    else if (order === 'desc') return (<span className="carret"><img src={right} alt={i18n.t('counters.table.downIconAlt')}/></span>);
     return null;
   }
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      Showing { from } to { to } of { size } Results
+      {i18n.t('counters.table.showing')} { from } {i18n.t('counters.table.to')} { to } {i18n.t('counters.table.of')} { size } {i18n.t('counters.table.results')}
     </span>
   );
 
   tableColumns = () => {
     const columns = [{
       dataField: 'id',
-      text: 'ID',
+      text: i18n.t('counters.table.id'),
       sort: true,
       sortCaret: this.sortCaret
     }, {
       dataField: 'title',
-      text: 'Title',
+      text: i18n.t('counters.table.title'),
       sort: true,
       sortCaret: this.sortCaret
     }, {
       dataField: 'count',
-      text: 'Count',
+      text: i18n.t('counters.table.count'),
       sort: true,
       sortCaret: this.sortCaret,
       footer: '',
       footerFormatter: this.sumFormatter
     },  {
       dataField: '',
-      text: 'Inc',
+      text: i18n.t('counters.table.inc'),
       align: 'center',
       formatter: this.plusButtonFormatter,
       events: {
@@ -69,7 +70,7 @@ class CountersTable extends Component {
       }
     },  {
       dataField: '',
-      text: 'Dec',
+      text: i18n.t('counters.table.dec'),
       align: 'center',
       formatter: this.lessButtonFormatter,
       events: {
@@ -79,7 +80,7 @@ class CountersTable extends Component {
       }
     }, {
       dataField: '',
-      text: 'Delete',
+      text: i18n.t('counters.table.delete'),
       align: 'center',
       formatter: this.deleteButtonFormatter,
       events: {
@@ -112,7 +113,7 @@ class CountersTable extends Component {
       }, {
         text: '25', value: 25
       }, {
-        text: 'All', value: counters.length
+        text: i18n.t('counters.table.all'), value: counters.length
       }] 
     };
     return options;
@@ -121,8 +122,8 @@ class CountersTable extends Component {
   plusButtonFormatter = (cell, row) => {
     return (
       <div className="actions mb-0 like-dislike">
-        <button className="member-link btn like" title="Increase count">
-          <img src={like} alt="Like Icon, add a like!"/>
+        <button className="member-link btn like" title={i18n.t('counters.table.increaseBtn')}>
+          <img src={like} alt={i18n.t('counters.table.likeIconAlt')}/>
         </button>
       </div>
     );
@@ -131,8 +132,8 @@ class CountersTable extends Component {
   lessButtonFormatter = (cell, row) => {
     return (
       <div className="actions mb-0 like-dislike">
-        <button className="member-link btn dislike" title="Decrease count">
-          <img src={dislike} alt="Dislike Icon, remove a like!"/>
+        <button className="member-link btn dislike" title={i18n.t('counters.table.decreaseBtn')}>
+          <img src={dislike} alt={i18n.t('counters.table.dislikeIconAlt')}/>
         </button>
       </div>
     );
@@ -141,8 +142,8 @@ class CountersTable extends Component {
   deleteButtonFormatter = (cell, row) => {
     return (
       <div className="actions mb-0">
-        <button className="member-link btn delete-btn" title="Delete">
-          <img src={trash} alt="Trash Icon, delete counter!"></img>
+        <button className="member-link btn delete-btn" title={i18n.t('counters.table.deleteBtn')}>
+          <img src={trash} alt={i18n.t('counters.table.trashIconAlt')}></img>
         </button>
       </div>
     );
@@ -152,7 +153,7 @@ class CountersTable extends Component {
     const { counters } = this.state;
     const value = counters.length > 0 ? counters.map(o => o.count).reduce((a, b) => parseInt(a) + parseInt(b)) : 0;
     return (
-      <h5><strong>Counters Total: { value }</strong></h5>
+      <h5><strong>{i18n.t('counters.table.total')} { value }</strong></h5>
     );
   }
   /* eslint-enable no-unused-vars */
@@ -214,7 +215,7 @@ class CountersTable extends Component {
                 <SearchBar { ...props.searchProps } />
                 <BootstrapTable
                   { ...props.baseProps }
-                  noDataIndication="Empty Table"
+                  noDataIndication={i18n.t('counters.table.empty')}
                   pagination={ paginationFactory(this.tablePaginationOptions(counters)) }
                   hover
                 />

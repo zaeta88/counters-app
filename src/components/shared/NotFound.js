@@ -1,11 +1,12 @@
 import React from 'react';
 import clouds from '../../assets/img/clouds.svg';
+import i18n from '../../i18n';
 
 const Notfound = () => (
   <div className="card">
     <div className="card-body" style={{ marginTop: '5%' }}>
       <center>
-        <img id="error-img" src={clouds} alt="Clouds icon, error" style={{ width: '5%' }} />
+        <img id="error-img" src={clouds} alt={i18n.t('notFound.iconAlt')} style={{ width: '5%' }} />
       </center>
       <center style={{
         lineHeight: '18px',
@@ -14,8 +15,8 @@ const Notfound = () => (
         marginTop: '8px'
       }}
       >
-        <p>This page doesn't exist.</p>
-        <p>Verify that you have correctly written the link you want.</p>
+        <h1>{i18n.t('notFound.title')}</h1>
+        <p>{i18n.t('notFound.message')}</p>
       </center>
     </div>
   </div>

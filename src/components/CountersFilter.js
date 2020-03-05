@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Col, Row } from 'react-bootstrap';
 import './CountersFilter.css';
 import filter from '../assets/img/filter.svg';
+import i18n from '../i18n';
 
 class CountersFilter extends Component {
   constructor(props) {
@@ -28,14 +29,14 @@ class CountersFilter extends Component {
     return (
       <div className="sidebar row">
           <button className="btn btn-filters" onClick={this.toggleMenu}>
-            <img src={filter} alt="Filter Icon, Filter counters table."/>
+            <img src={filter} alt={i18n.t('counters.filter.iconAlt')}/>
           </button>
           { this.state.visible && 
             <Form.Group as={Row} controlId="validationCount">
               <Col md="6" xs="6">
                 <Form.Control 
                   type="number" 
-                  placeholder="Greater Than >" 
+                  placeholder={i18n.t('counters.filter.greater')} 
                   min='0'
                   name="greater"
                   onChange={this.handleChange}
@@ -44,7 +45,7 @@ class CountersFilter extends Component {
               <Col md="6" xs="6">
                 <Form.Control 
                   type="number" 
-                  placeholder="Less Than <" 
+                  placeholder={i18n.t('counters.filter.less')} 
                   min='0'
                   name="less"
                   onChange={this.handleChange}
